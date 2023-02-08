@@ -22,15 +22,22 @@ def wishMe():
     else:
         speak('Good Evening sir')
 
-    speak('I am Jarvis')
+    speak('I am your voice assistent vesalov')
 def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
+        print('test1')
         print('Listening...')
+        print('test 2')
         r.pause_threshold = 1
+        print('test 3')
         audio = r.listen(source)
 
+        print('test 4')
+    print(takeCommand())
     try:
+        print("You said " + r.recognize(audio))  # recognize speech using Google Speech Recognition
+
         print('Recognizing...')
         query = r.recognize_google(audio, language='en')
         print(f"User said: {query}\n")

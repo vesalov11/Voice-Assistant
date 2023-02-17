@@ -39,7 +39,7 @@ def takeCommand():
         print("You said " + r.recognize(audio))  # recognize speech using Google Speech Recognition
 
         print('Recognizing...')
-        query = r.recognize_google(audio, language='en')
+        query = r.recognize_google(audio, language='bg')
         print(f"User said: {query}\n")
 
     except Exception as e:
@@ -51,15 +51,3 @@ def takeCommand():
 
 if __name__ == "__main__":
    wishMe()
-   while True:
-        query = takeCommand().lower()
-   #executing task based on
-        if 'wikipedia' in query:
-            speak('Searching wikipedia')
-            query = query.replace("wikipedia", "")
-            results = wikipedia.summary(query, sentences=2)
-            speak("According to Wikipedia")
-            speak(results)
-
-        elif 'open YouTube' in query:
-            webbrowser.open_new_tab("https:\\www.youtube.com")

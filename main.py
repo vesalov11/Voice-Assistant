@@ -7,11 +7,6 @@ import pyjokes
 
 
 
-
-import sys
-sys.
-
-
 listener = sr.Recognizer()
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')

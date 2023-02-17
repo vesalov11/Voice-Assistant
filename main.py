@@ -4,57 +4,29 @@ import pywhatkit
 import datetime
 import wikipedia
 import pyjokes
-import requests, json, sys
+
+
+
+
+import sys
+sys.
+
 
 listener = sr.Recognizer()
 engine = pyttsx3.init()
-voices = engine.getProperty("voices")
+voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[1].id)
 
 
-def engine_talk(text):
+def talk(text):
     engine.say(text)
     engine.runAndWait()
 
 
-def weather(city):
-    api_key = "<YOUR API KEY"
-
-    base_url = "http://api.openweathermap.org/data/2.5/weather?"
-
-    #
-    city_name = city
-
-    complete_url = base_url + "appid=" + api_key + "&q=" + city_name
-
-    response = requests.get(complete_url)
-
-    x = response.json()
-
-    if x["cod"] != "404":
-        y = x["main"]
-
-        current_temperature = y["temp"]
-
-        return str(current_temperature)
-
-        '''print(" Temperature (in kelvin unit) = " +
-                        str(current_temperature) + 
-            "\n atmospheric pressure (in hPa unit) = " +
-                        str(current_pressure) +
-            "\n humidity (in percentage) = " +
-                        str(current_humidiy) +
-            "\n description = " +
-                        str(weather_description)) 
-    else: 
-        print(" City Not Found ")
-        '''
-
-
-def user_commands():
+def take_command():
     try:
         with sr.Microphone() as source:
-            print("Start Speaking!!")
+            print('listening...')
             voice = listener.listen(source)
             command = listener.recognize_google(voice)
             command = command.lower()
@@ -67,49 +39,29 @@ def user_commands():
 
 
 def run_alexa():
-    command = user_commands()
+    command = take_command()
+    print(command)
     if 'play' in command:
         song = command.replace('play', '')
-
-        engine_talk('Playing' + song)
+        talk('playing ' + song)
         pywhatkit.playonyt(song)
     elif 'time' in command:
         time = datetime.datetime.now().strftime('%I:%M %p')
-        engine_talk('The current time is' + time)
-    elif 'who is' in command:
-        name = command.replace('who is', '')
-        info = wikipedia.summary(name, 1)
+        talk('Current time is ' + time)
+    elif 'who the heck is' in command:
+        person = command.replace('who the heck is', '')
+        info = wikipedia.summary(person, 1)
         print(info)
-        engine_talk(info)
+        talk(info)
+    elif 'date' in command:
+        talk('sorry, I have a headache')
+    elif 'are you single' in command:
+        talk('I am in a relationship with wifi')
     elif 'joke' in command:
-        engine_talk(pyjokes.get_joke())
-    elif 'weather' in command:
-        engine_talk('Please tell the name of the city')
-        city = user_commands()
-        weather_api = weather(city)
-        engine_talk(weather_api + 'degree fahreneit')
-    elif 'stop' in command:
-        sys.exit()
+        talk(pyjokes.get_joke())
     else:
-        engine_talk('I could not hear you properly')
+        talk('Please say the command again.')
 
 
 while True:
     run_alexa()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,7 +1,7 @@
 import random
 from gtts import gTTS
 import speech_recognition as sr
-
+import webbrowser
 
 def listen():
     r = sr.Recognizer()
@@ -19,11 +19,20 @@ def listen():
 
 def hangle_message(message):
     message = message.lower()
-    if "шаро" in message:
+    if "зара" in message:
         if "чао" in message:
             exit()
         elif"youtube" in message:
             print('стартитаме you tube')
+            webbrowser.open_new_tab('https://www.youtube.com')
+def hangle_message(message):
+    message = message.lower()
+    if "зара" in message:
+        if "чао" in message:
+            exit()
+        elif"Netflix" in message:
+            print('стартитаме Netflix')
+            webbrowser.open_new_tab('https://www.netflix.com')
 
 
 if __name__ == '__main__':

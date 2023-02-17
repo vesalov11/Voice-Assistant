@@ -3,6 +3,7 @@ import speech_recognition as sr
 import datetime
 import wikipedia
 import webbrowser
+import pyaudio
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -26,14 +27,13 @@ def wishMe():
 def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        print('test1')
+
         print('Listening...')
-        print('test 2')
+
         r.pause_threshold = 1
-        print('test 3')
+
         audio = r.listen(source)
 
-        print('test 4')
     print(takeCommand())
     try:
         print("You said " + r.recognize(audio))  # recognize speech using Google Speech Recognition
